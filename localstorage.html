@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onSubmit="storage(event)">
+        <label>Name:</label>
+        <input type="text" name="username" required>
+        <label>Email</label>
+        <input type="email" name="emailid" required>
+        <button>Submit</button>
+    </form>
+    <script>
+        function storage(e) {
+            e.preventDefault();
+            const name = e.target.username.value;
+            const email = e.target.emailid.value;
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+            const obj={
+               name,
+                email
+            }
+            localStorage.setItem('userdetails',JSON.stringify(obj))
+        }
+    </script>
+</body>
+
+</html>
