@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onSubmit="storage(event)">
+        <label>Name:</label>
+        <input type="text" name="username" required>
+        <label>Email</label>
+        <input type="email" name="emailid" required>
+        <button>Submit</button>
+    </form>
+    <ul id="listofitems"></ul>
+    <script>
+        function storage(e) {
+            e.preventDefault();
+            const name = e.target.username.value;
+            const email = e.target.emailid.value;
+            //localStorage.setItem('name', name);
+            //localStorage.setItem('email', email);
+            const obj = {
+                name,
+                email
+            }
+            localStorage.setItem(obj.name, JSON.stringify(obj))
+            show(obj)
+            
+        }
+        function show(item) {
+            const result = document.getElementById('listofitems')
+            //result.innerHTML=result.innerHTML+`<li>${item.name} - ${item.email}</li>`
+            const li=document.createElement('li')
+            li.textContent=`${item.name} - ${item.email}`
+           
+            var deletebtn=document.createElement('button')
+            deletebtn.className='btn-danger'
+            deletebtn.appendChild(document.createTextNode('Delete'))
+            
+            deletebtn.onclick=() =>{
+                    localStorage.removeItem(item.name)
+                    result.removeChild(li)
+            }
+            li.appendChild(deletebtn)
+            result.appendChild(li)
+        }
+        
+
+
+    </script>
+</body>
+
+</html>
