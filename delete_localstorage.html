@@ -10,11 +10,11 @@
 </head>
 
 <body>
-    <form onSubmit="storage(event)">
+    <form  onSubmit="storage(event)">
         <label>Name:</label>
-        <input type="text" name="username" required>
+        <input type="text" name="username" id='nameid' required>
         <label>Email</label>
-        <input type="email" name="emailid" required>
+        <input type="email" name="emailid" id='emailid' required>
         <button>Submit</button>
     </form>
     <ul id="listofitems"></ul>
@@ -42,12 +42,25 @@
             var deletebtn=document.createElement('button')
             deletebtn.className='btn-danger'
             deletebtn.appendChild(document.createTextNode('Delete'))
+
+            var editbtn=document.createElement('button')
+            editbtn.className="btn-success"
+            editbtn.appendChild(document.createTextNode('Edit'))
             
             deletebtn.onclick=() =>{
                     localStorage.removeItem(item.name)
                     result.removeChild(li)
             }
+            editbtn.onclick=() =>
+            {
+                localStorage.removeItem(item.name)
+                result.removeChild(li)
+                document.getElementById('nameid').value=item.name;
+                document.getElementById('emailid').value=item.email;
+               
+            }
             li.appendChild(deletebtn)
+            li.appendChild(editbtn)
             result.appendChild(li)
         }
         
